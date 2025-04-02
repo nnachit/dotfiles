@@ -12,6 +12,8 @@ from colorama import Fore, Style, init
 init(autoreset=True)
 
 
+REQUIREMENT_FILE = "system-requirements.txt"
+
 class ColorizedFormatter(logging.Formatter):
     """
     Custom log formatter to add colors for console output.
@@ -102,6 +104,20 @@ def update_system():
     except subprocess.CalledProcessError as e:
         logging.error(f"An error occurred during the update: {e}")
 
+
+def install_system_requirements():
+
+    with open(REQUIREMENT_FILE, "r") as f:
+        packages = [package.strip() for package in f if package.strip() and not package.startswith("#")]
+
+    if packages:
+        cmd = ["sudo", "apt", "install", "-y"] + packages
+        logging.info(f"Installing packages : {', '.join(packages)}")
+        subprocess.run(cmd)
+    else:
+        logging.info("No packages to install.")
+
+
 def main():
     """
     Main function to execute the kernel update check.
@@ -110,6 +126,8 @@ def main():
     check_kernel_update()
     # Configure the logging system
     update_system()
+    # install system requirements
+    install_system_requirements()
 
 # Entry point of the script
 if __name__ == "__main__":
