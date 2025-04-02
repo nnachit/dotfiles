@@ -6,16 +6,44 @@
 # themes
 import logging
 import subprocess
+from colorama import Fore, Style, init
 
-# Setup logging configuration
-logging.basicConfig(
-    level=logging.INFO,  # Define the log level
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler("dotfile.log"),  # Log messages will be saved to this file
-        logging.StreamHandler()  # Log messages will also appear in the standard output
-    ]
-)
+# Initialize Colorama
+init(autoreset=True)
+
+
+class ColorizedFormatter(logging.Formatter):
+    """
+    Custom log formatter to add colors for console output.
+    """
+    COLORS = {
+        logging.DEBUG: Fore.BLUE,  # Blue for debug messages
+        logging.INFO: Fore.GREEN,  # Green for informational messages
+        logging.WARNING: Fore.YELLOW,  # Yellow for warnings
+        logging.ERROR: Fore.RED,  # Red for errors
+        logging.CRITICAL: Fore.MAGENTA  # Magenta for critical errors
+    }
+
+    def format(self, record):
+        color = self.COLORS.get(record.levelno, "")
+        message = super().format(record)
+        return f"{color}{message}{Style.RESET_ALL}"
+
+# Setup logging
+file_handler = logging.FileHandler("kernel_update.log")  # Log to file
+console_handler = logging.StreamHandler()  # Log to console
+
+# Colors only for console
+console_formatter = ColorizedFormatter('%(asctime)s - %(levelname)s - %(message)s')
+console_handler.setFormatter(console_formatter)
+
+# Standard (non-color) formatter for file
+file_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+file_handler.setFormatter(file_formatter)
+
+# Configure global logger
+logging.basicConfig(level=logging.INFO, handlers=[file_handler, console_handler])
+
 
 def check_kernel_update():
     """
@@ -40,9 +68,10 @@ def check_kernel_update():
         ]
 
         if kernel_updates:
-            logging.info("Kernel updates are available:")
+            logging.warning("Kernel updates are available:")
             for update in kernel_updates:
                 logging.info(f"  - {update}")
+            logging.warning("Please reboot to update the kernel")
         else:
             logging.info("No kernel updates are available.")
 
