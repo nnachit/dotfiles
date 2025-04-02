@@ -71,7 +71,7 @@ def check_kernel_update():
             logging.warning("Kernel updates are available:")
             for update in kernel_updates:
                 logging.info(f"  - {update}")
-            logging.warning("Please reboot to update the kernel")
+            logging.warning("Please update the kernel and reboot before continuing.")
         else:
             logging.info("No kernel updates are available.")
 
@@ -102,6 +102,15 @@ def update_system():
     except subprocess.CalledProcessError as e:
         logging.error(f"An error occurred during the update: {e}")
 
+def main():
+    """
+    Main function to execute the kernel update check.
+    """
+    # Perform the kernel update check
+    check_kernel_update()
+    # Configure the logging system
+    update_system()
 
-check_kernel_update()
-update_system()
+# Entry point of the script
+if __name__ == "__main__":
+    main()
