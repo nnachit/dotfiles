@@ -19,6 +19,8 @@ FONTS_DIR = "fonts"
 FONTS_TARGET = "~/.fonts"
 THEMES_DIR = "themes"
 THEMES_TARGET = "~/.themes"
+REPOS_DIR = "repos"
+REPOS_TARGET = "/etc/apt/sources.list.d/"
 
 
 class ColorizedFormatter(logging.Formatter):
@@ -211,6 +213,7 @@ def main():
     clone_repo(P10K_REPO, P10K_DIR, P10K_TARGET)
     # Install fonts
     copy_config(FONTS_DIR, FONTS_TARGET)
+    # Install fonts
     copy_config(THEMES_DIR, THEMES_TARGET)
 
 # Entry point of the script
