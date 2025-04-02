@@ -1,0 +1,76 @@
+# Byte-compiled/Django files
+*.py[cod]
+__pycache__/
+*.so
+*.pyo
+
+# Virtual environment files
+venv/
+env/
+ENV/
+.venv/
+.virtualenv/
+
+# IDE configuration files (PyCharm, VSCode, etc.)
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Django specific files
+*.log
+*.pot
+*.pyc
+local_settings.py
+db.sqlite3
+media/
+staticfiles/
+
+# Git and OS generated files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.bak
+*.orig
+
+# Python package files
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+pip-wheel-metadata/
+
+# Migrations (optional, keep if shared migrations not desired)
+**/migrations/
+
+# pytest
+htmlcov/
+*.cover
+.cache
+nosetests.xml
+coverage.xml
+*.coveragerc
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# Test output
+.tox/
+.pytest_cache/
+
+# Deployment
+*.env
+.env.*
+*.crt
+*.key
+
+# Static and media files generated dynamically
+/static/
+/media/
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+

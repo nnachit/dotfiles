@@ -1,0 +1,25 @@
+# Themes --
+import = [
+  "~/.config/alacritty/nord.toml"
+]
+
+[font]
+#glyph_offset = { x = 1, y = 0 }
+normal.family = "JetBrainsMono Nerd Font"
+normal.style = "Regular"
+size = 10
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+
+[window]
+opacity = 0.9
+
+[window.padding]
+x = 8
+y = 8
